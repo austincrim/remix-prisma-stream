@@ -6,6 +6,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development netlify dev",
+    "build:prisma": "cross-env PRISMA_CLIENT_ENGINE_TYPE=dataproxy prisma generate",
     "postinstall": "remix setup node"
   },
   "dependencies": {

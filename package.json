@@ -5,10 +5,9 @@
   "license": "",
   "scripts": {
     "build": "remix build",
-    "postbuild": "prisma generate",
     "dev": "cross-env NODE_ENV=development netlify dev",
     "build:prisma": "cross-env PRISMA_CLIENT_ENGINE_TYPE=dataproxy prisma generate",
-    "postinstall": "remix setup node"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@netlify/functions": "^0.10.0",

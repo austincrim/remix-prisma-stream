@@ -6,7 +6,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development netlify dev",
-    "postinstall": "prisma generate",
+    "postinstall": "PRISMA_CLIENT_ENGINE_TYPE=dataproxy prisma generate",
     "load-test": "k6 run --vus 50 --duration 5s load-test.js"
   },
   "dependencies": {

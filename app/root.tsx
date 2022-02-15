@@ -11,7 +11,7 @@ import styles from './styles/index.css'
 import type { MetaFunction } from 'remix'
 
 export const meta: MetaFunction = () => {
-  return { title: 'My Remix Blog' }
+  return { title: 'Jot-A-Thought' }
 }
 
 export let links: LinksFunction = () => {

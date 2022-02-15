@@ -32,7 +32,7 @@ export default function Index() {
   return (
     <>
       <main>
-        <h1>Jot-A-Thought</h1>
+        <h1>Jot-A-Thought 🖋️</h1>
         <form method="POST" action="/?index">
           <label htmlFor="title">Title</label>
           <input id="title" name="title" type="text" required />

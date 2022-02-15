@@ -35,7 +35,13 @@ export default function Index() {
         <h1>Jot-A-Thought 🖋️</h1>
         <form method="POST" action="/?index">
           <label htmlFor="title">Title</label>
-          <input id="title" name="title" type="text" required />
+          <input
+            autoComplete="off"
+            id="title"
+            name="title"
+            type="text"
+            required
+          />
           <label htmlFor="content">Content</label>
           <textarea id="content" name="content" required></textarea>
           <button type="submit">Jot 🖋️</button>

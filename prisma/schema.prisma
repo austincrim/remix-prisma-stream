@@ -3,17 +3,17 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["dataProxy", "referentialIntegrity"]
+  previewFeatures = ["dataProxy"]
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider = "postgres"
+  url      = env("DATABASE_URL")
 }
 
-model Todo {
-  id        Int     @id @default(autoincrement())
+model Note {
+  id        Int      @id @default(autoincrement())
   title     String
-  completed Boolean
+  content   String
+  updatedAt DateTime @updatedAt
 }

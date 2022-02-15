@@ -1,46 +1,55 @@
-import { prisma, PrismaClient, Todo } from '@prisma/client'
+import { Note } from '@prisma/client'
 import { ActionFunction, json, LoaderFunction, useLoaderData } from 'remix'
+import { prisma } from '~/lib/prisma.server'
 
 export let loader: LoaderFunction = async () => {
-  const prisma = new PrismaClient()
-  let results = await prisma.todo.findMany()
+  let results = await prisma.note.findMany()
 
   return json(results)
 }
 
 export let action: ActionFunction = async ({ request }) => {
-  const prisma = new PrismaClient()
-  let title = (await request.formData()).get('title')?.toString()
+  let form = await request.formData()
+  let title = form.get('title')?.toString()
+  let content = form.get('content')?.toString()
 
-  await prisma.todo.create({
+  if (!title) throw new Error('must provide title!')
+  if (!content) throw new Error('must provide content!')
+
+  let created = await prisma.note.create({
     data: {
-      title,
-      completed: false
+      title: title,
+      content: content
     }
   })
 
-  return json(null, { status: 200 })
+  return json(created, { status: 200 })
 }
 
 export default function Index() {
-  let todos = useLoaderData<Todo[]>()
+  let notes = useLoaderData<Note[]>()
+
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
-      <h1>Welcome to Remix</h1>
-      <form method="POST" action="/?index">
-        <label>
-          New Todo
-          <br />
-          <input name="title" type="text" required />
-        </label>
-        <br />
-        <button type="submit">Add</button>
-      </form>
-      <ul>
-        {todos.map((t) => (
-          <li key={t.id}>{t.title}</li>
+    <>
+      <main>
+        <h1>Jot-A-Thought</h1>
+        <form method="POST" action="/?index">
+          <label htmlFor="title">Title</label>
+          <input id="title" name="title" type="text" required />
+          <label htmlFor="content">Content</label>
+          <textarea id="content" name="content" required></textarea>
+          <button type="submit">Jot 🖋️</button>
+        </form>
+      </main>
+      <ul className="note-list">
+        {notes.map((p) => (
+          <li className="note" key={p.id}>
+            <article>
+              <a href={`/note/${p.id}`}>{p.title}</a>
+            </article>
+          </li>
         ))}
       </ul>
-    </div>
+    </>
   )
 }

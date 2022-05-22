@@ -4,7 +4,7 @@ import { sleep } from 'k6'
 
 export default function () {
   http.post(
-    'https://remix-prisma-stream.netlify.app/?index',
+    'https://deploy-preview-1--remix-prisma-stream.netlify.app/?index',
     { title: 'note', content: "i'm content!" },
     { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
   )
